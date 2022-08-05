@@ -31,15 +31,8 @@ class _addGoalPageState extends State<addGoalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Add a new goal',
-      theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-      ),
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Add a new goal'),
-          ),
+    return Scaffold(
+
           body: Container(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -107,7 +100,6 @@ class _addGoalPageState extends State<addGoalPage> {
               ),
             ),
           )
-      ),
     );
   }
 

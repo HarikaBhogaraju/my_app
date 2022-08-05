@@ -12,35 +12,58 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   //variables
-
+int currentIndex = 0;
+final screens = [
+  Text("HOME"),
+  Text("Habits"),
+  addGoalPage()
+];
+final screenNames = [
+  Text("Home"),
+  Text("Habits"),
+  Text("Add a goal"),
+];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View goals'),
+        title:IndexedStack(
+          index: currentIndex,
+          children: screenNames,
+        ),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Padding(padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Hello Home!',
-            style: TextStyle(fontSize: 34, color: Colors.black),
-          ),
-        )
-      ],
-    ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const addGoalPage()));
-        },
-        label: const Text('Add a goal'),
-        icon: const Icon(Icons.add),
-        backgroundColor: Colors.blue,
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
       ),
+      bottomNavigationBar:BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.blue,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.white,
+        currentIndex: currentIndex,
+        onTap: (index) => setState(
+                () => currentIndex = index
+        ),
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.lightBlue
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Habits',
+              backgroundColor: Colors.lightBlue
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.run_circle_outlined),
+              label: 'Goals',
+              backgroundColor: Colors.lightBlue
+          ),
+        ],
+      ) ,
     );
 }
 }
